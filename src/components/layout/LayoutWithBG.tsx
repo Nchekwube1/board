@@ -1,16 +1,15 @@
-import {ImageBackground} from 'react-native';
 import React, {FC, ReactNode} from 'react';
-import {useAppSelector, useTribaBg} from '../../constants/utils/hooks';
+import {useAppSelector} from '../../constants/utils/hooks';
 import LayoutWithSafeArea from './LayoutWithSafeArea';
 import globalStyle from '../../globalStyle/globalStyle';
 import LayoutWithSafeAreaWithoutScroll from './LayoutWithSafeAreaWithoutScroll';
+import Box from './Box';
 
 interface MainLayoutProps {
   children: ReactNode;
   withoutScroll?: boolean;
 }
 const LayoutWithBG: FC<MainLayoutProps> = ({children, withoutScroll}) => {
-  const tribaBG = useTribaBg();
   const {darkMode} = useAppSelector(state => state.darkMode);
   return (
     <>
@@ -25,7 +24,7 @@ const LayoutWithBG: FC<MainLayoutProps> = ({children, withoutScroll}) => {
           )}
         </>
       ) : (
-        <ImageBackground source={tribaBG} style={[globalStyle.flexOne]}>
+        <Box style={[globalStyle.flexOne]}>
           {withoutScroll ? (
             <LayoutWithSafeAreaWithoutScroll transparent>
               {children}
@@ -33,7 +32,7 @@ const LayoutWithBG: FC<MainLayoutProps> = ({children, withoutScroll}) => {
           ) : (
             <LayoutWithSafeArea transparent>{children}</LayoutWithSafeArea>
           )}
-        </ImageBackground>
+        </Box>
       )}
     </>
   );

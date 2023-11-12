@@ -1,4 +1,3 @@
-import React, {useCallback, useMemo} from 'react';
 import {AppDispatch, RootState} from '../../store/store';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';

@@ -4,63 +4,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {MotiTransitionProp} from 'moti';
 import {Easing} from 'react-native-reanimated';
-import Geolocation from 'react-native-geolocation-service';
 import {Keyboard, PermissionsAndroid, Platform} from 'react-native';
 import dayjs from 'dayjs';
 import {emailPattern} from './constants';
-import {Linking} from 'react-native';
-// import '../../../shim';
-import InAppBrowser from 'react-native-inappbrowser-reborn';
-// var Buffer = require('@craftzdog/react-native-buffer').Buffer;
-// import crypto from 'react-native-quick-crypto';
-import CryptoJS from 'crypto-js';
-// import CryptoJS from 'react-native-crypto-js';
-// import crypto from '../../../crypto';
-// import {generateSecureRandom} from 'react-native-securerandom';
-// import crypto from 'crypto';
 
-import palette from '../colors/pallete';
-import {getUniqueId, getDeviceId} from 'react-native-device-info';
-export const getCurrentLocation = () => {
-  let position: {lat: number | undefined; long: number | undefined} = {
-    lat: undefined,
-    long: undefined,
-  };
-  Geolocation.getCurrentPosition(
-    location => {
-      // console.log({locunfjd: location});
-
-      position = {
-        lat: location.coords.latitude,
-        long: location.coords.longitude,
-      };
-    },
-    () => {},
-    {
-      enableHighAccuracy: true,
-      timeout: 15000,
-      maximumAge: 5,
-      showLocationDialog: true,
-    },
-  );
-
-  return position;
-};
-
-export const getAuthorizationIos = () => {
-  return Geolocation.requestAuthorization('always');
-};
-export const getAuthorizationAndroid = () => {
-  return PermissionsAndroid.request(
-    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    {
-      title: 'Dot Location Permission',
-      message: 'Dot wants to access your location',
-      buttonPositive: 'OK',
-      buttonNegative: 'Cancel',
-    },
-  );
-};
 export const getContactAuthorizationAndroid = () => {
   return PermissionsAndroid.request(
     PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
@@ -340,49 +287,6 @@ export const getGreetings = () => {
   return welcome;
 };
 
-export async function openLink(url: string) {
-  try {
-    if (await InAppBrowser.isAvailable()) {
-      await InAppBrowser.open(url, {
-        // iOS Properties
-        dismissButtonStyle: 'cancel',
-        preferredBarTintColor: palette.primary10,
-        preferredControlTintColor: 'white',
-        readerMode: false,
-        animated: true,
-        modalPresentationStyle: 'fullScreen',
-        modalTransitionStyle: 'coverVertical',
-        modalEnabled: true,
-        enableBarCollapsing: false,
-        // Android Properties
-        showTitle: true,
-        toolbarColor: palette.primary10,
-        secondaryToolbarColor: 'black',
-        navigationBarColor: 'black',
-        navigationBarDividerColor: 'white',
-        enableUrlBarHiding: true,
-        enableDefaultShare: true,
-        forceCloseOnRedirection: false,
-        // Specify full animation resource identifier(package:anim/name)
-        // or only resource name(in case of animation bundled with app).
-        animations: {
-          startEnter: 'slide_in_right',
-          startExit: 'slide_out_left',
-          endEnter: 'slide_in_left',
-          endExit: 'slide_out_right',
-        },
-        // headers: {
-        //   'my-custom-header': 'my custom header value',
-        // },
-      });
-    } else {
-      Linking.openURL(url);
-    }
-  } catch (error) {
-    InAppBrowser.close();
-  }
-}
-
 export const withSpace = (num: string | number) => {
   try {
     return num.toString().replace(/\B(?=(\d{5})+(?!\d))/g, ' ');
@@ -397,11 +301,6 @@ export const trimEmail = (email: string) => {
   return email.trim().toLocaleLowerCase();
 };
 
-export const getDeviceID = async () => {
-  const biodevice = `${await getUniqueId()}${getDeviceId()}`;
-
-  return biodevice;
-};
 export const segmentpin = (text: String) => {
   try {
     let result = String(text.match(/.{1,4}/g)).replace(/,/g, '  ');
@@ -465,47 +364,6 @@ export const extractnumber = (txt: string) => {
 //     return console.log('me-error', r), {s: !1, m: 'failed!'};
 //   }
 // };
-
-export const hashRequest2 = (payload: string) => {
-  const REACTKEY = 'tpoaswp9zBxL6trtGurirJQjHrG0weM7uP2aSb_39P';
-  const PADDEDENCKEY = 'irJQjHr7zBuuPswp9rP2aSbxL6G0weMtpoatrtG_39';
-  const ENCKEY = 'G0weMtpoairJQjHr7zBxL6trtGuuP2aSb_39Pswp9r';
-
-  const tf: any = (r: string, t: string, e: string, o: string) => {
-    try {
-      const n = CryptoJS.SHA256(t).toString(CryptoJS.enc.Hex),
-        c = CryptoJS.lib.WordArray.random(16),
-        S = r,
-        p = e,
-        y = CryptoJS.enc.Hex.parse(n);
-
-      let i = CryptoJS.AES.encrypt(S, y, {iv: c}).ciphertext.toString(
-        CryptoJS.enc.Base64,
-      );
-
-      const s = o;
-
-      return {
-        s: !0,
-        m: 'done!',
-        d: i,
-        i: c.toString(CryptoJS.enc.Hex),
-        c: p,
-        f: s,
-      };
-    } catch (i) {
-      return i;
-      // return console.log('me-error', r), {s: !1, m: 'failed!'};
-    }
-  };
-
-  const encresult = tf(JSON.stringify(payload), REACTKEY, PADDEDENCKEY, ENCKEY);
-
-  const requestpayload = JSON.stringify({
-    data: `${encresult?.d}|${encresult?.i}`,
-  });
-  return requestpayload;
-};
 
 type RateExt = {
   type: 'PERCENT' | 'VALUE';

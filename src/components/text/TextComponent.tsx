@@ -2,9 +2,8 @@ import {StyleProp, Text, TextStyle} from 'react-native';
 import React, {FC} from 'react';
 import globalStyle from '../../globalStyle/globalStyle';
 import {useAppSelector} from '../../constants/utils/hooks';
-import {StringifiedStyles} from 'react-native-size-matters';
 interface textProps {
-  style?: StyleProp<TextStyle | StringifiedStyles>;
+  style?: StyleProp<TextStyle>;
   numberOfLines?: number;
   onPress?: () => void;
   children: any;

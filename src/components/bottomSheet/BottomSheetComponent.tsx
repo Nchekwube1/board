@@ -3,7 +3,6 @@ import ReactNativeModal from 'react-native-modal';
 import pallete from '../../constants/colors/pallete';
 import globalStyle, {height} from '../../globalStyle/globalStyle';
 import {ScaledSheet} from 'react-native-size-matters';
-import Box from '../layout/Box';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
@@ -15,6 +14,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {KeyboardAvoidingView, View} from 'react-native';
 import {isIos} from '../../constants/utils/utils';
+import Box from '../layout/Box';
 interface bottomSheetProps {
   setShowBlur: Dispatch<SetStateAction<boolean>>;
   setSuccess?: Dispatch<SetStateAction<boolean>>;

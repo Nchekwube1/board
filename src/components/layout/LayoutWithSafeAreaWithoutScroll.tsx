@@ -6,11 +6,11 @@ import {
   Keyboard,
 } from 'react-native';
 import React, {FC, ReactNode} from 'react';
-import globalStyle from '../../globalStyle/globalStyle';
 import Box from './Box';
-import pallete from '../../constants/colors/pallete';
 import {StatusBar} from 'react-native';
+import globalStyle from '../../globalStyle/globalStyle';
 import {useAppSelector} from '../../constants/utils/hooks';
+import pallete from '../../constants/colors/pallete';
 interface MainLayoutProps {
   children: ReactNode;
   grayBg?: boolean;

@@ -2,11 +2,11 @@ import {ActivityIndicator, TouchableOpacityProps} from 'react-native';
 import React, {FC, ReactNode, useCallback, useEffect} from 'react';
 import TextComponent from '../text/TextComponent';
 import globalStyle from '../../globalStyle/globalStyle';
-import Box from '../layout/Box';
 import {useSharedValue} from 'react-native-reanimated';
 import PressableComponent from '../pressable/PressableComponent';
 import palette from '../../constants/colors/pallete';
 import {useAppSelector} from '../../constants/utils/hooks';
+import Box from '../layout/Box';
 
 export interface buttonProps extends TouchableOpacityProps {
   disabled?: boolean;

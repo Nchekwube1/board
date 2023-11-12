@@ -1,12 +1,4 @@
 import {Platform} from 'react-native';
-import {ImageLibraryOptions} from 'react-native-image-picker';
-
-export const imagePickerOptions: ImageLibraryOptions = {
-  mediaType: 'photo',
-  presentationStyle: 'fullScreen',
-  includeBase64: true,
-  selectionLimit: 1,
-};
 
 export const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const passwordPattern =

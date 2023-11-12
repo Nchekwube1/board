@@ -1,73 +1,18 @@
-import {Platform, TextInput} from 'react-native';
+import {TextInput} from 'react-native';
 import React, {FC} from 'react';
 import TextComponent from '../text/TextComponent';
 import {textInputProps} from '../../constants/types/types';
-import Box from '../layout/Box';
 import globalStyle from '../../globalStyle/globalStyle';
 import palette from '../../constants/colors/pallete';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useCurrency,
-} from '../../constants/utils/hooks';
-import ErrorAlert from '../../assets/svgs/errorAlert.svg';
-import {
-  getContactAuthorizationAndroid,
-  parsePhoneNumber,
-  removeCurrency,
-} from '../../constants/utils/utils';
-import PressableComponent from '../pressable/PressableComponent';
-import inputStyles from './inputStyles';
-import {selectContactPhone} from 'react-native-select-contact';
-import ProfileDark from '../../assets/svgs/profileDark.svg';
-import ProfileLight from '../../assets/svgs/profileLight.svg';
-import {showToast} from '../../reducerSlices/toastSlice';
+import {useAppSelector} from '../../constants/utils/hooks';
+import Box from '../layout/Box';
 const TextInputComponent: FC<textInputProps> = ({
   errorText,
   title,
-  showBalance,
-  secondaryText,
-  showContactIcon,
-  setValue,
   multiline,
   ...otherInputProps
 }) => {
   const {darkMode} = useAppSelector(state => state.darkMode);
-  const dispatch = useAppDispatch();
-  const {currency} = useCurrency();
-  const {
-    userBalance: {AvailableBalance},
-  } = useAppSelector(state => state.userBalance);
-  const selectContact = async () => {
-    if (Platform.OS === 'android') {
-      let status = await getContactAuthorizationAndroid();
-      //  if (status === 'denied' || status === 'never_ask_again') {
-      if (status === 'granted') {
-        selectCont();
-      } else {
-        dispatch(
-          showToast({
-            status: 2,
-            message:
-              'We do not have permission to read your contacts, please enable in settings',
-          }),
-        );
-      }
-    } else {
-      selectCont();
-    }
-  };
-  const selectCont = async () => {
-    const selection: any = await selectContactPhone();
-    const {selectedPhone} = selection;
-
-    setValue &&
-      setValue(
-        selectedPhone && selectedPhone.number
-          ? parsePhoneNumber(selectedPhone.number)
-          : '',
-      );
-  };
   return (
     <Box style={[globalStyle.w10]}>
       <Box
@@ -88,32 +33,6 @@ const TextInputComponent: FC<textInputProps> = ({
             ]}>
             {title}
           </TextComponent>
-        )}
-        {showBalance && (
-          <>
-            {secondaryText ? (
-              <TextComponent
-                secondary
-                style={[
-                  globalStyle.fontManropeRegular,
-                  globalStyle.fontSize12,
-                  globalStyle.mb0p4,
-                ]}>
-                {secondaryText}
-              </TextComponent>
-            ) : (
-              <TextComponent
-                secondary
-                style={[
-                  globalStyle.fontManropeRegular,
-                  globalStyle.fontSize12,
-                  globalStyle.mb0p4,
-                ]}>
-                Account balance: {currency}
-                {removeCurrency(AvailableBalance)}
-              </TextComponent>
-            )}
-          </>
         )}
       </Box>
 
@@ -158,21 +77,6 @@ const TextInputComponent: FC<textInputProps> = ({
           }
           {...otherInputProps}
         />
-        {showContactIcon && (
-          <PressableComponent
-            onPress={selectContact}
-            style={[
-              inputStyles.lockView,
-              globalStyle.justifyCenter,
-              globalStyle.alignItemsCenter,
-            ]}>
-            {darkMode ? (
-              <ProfileDark width={20} height={20} />
-            ) : (
-              <ProfileLight width={20} height={20} />
-            )}
-          </PressableComponent>
-        )}
       </Box>
 
       {errorText && (
@@ -182,9 +86,9 @@ const TextInputComponent: FC<textInputProps> = ({
             globalStyle.alignItemsCenter,
             globalStyle.mt0p8,
           ]}>
-          <Box style={[globalStyle.pr0p4]}>
+          {/* <Box style={[globalStyle.pr0p4]}>
             <ErrorAlert />
-          </Box>
+          </Box> */}
           <TextComponent
             style={[
               globalStyle.fontSize10,

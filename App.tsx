@@ -1,24 +1,23 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {SafeAreaView, StatusBar, Text, useColorScheme} from 'react-native';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Wrapper from './Wrapper';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistor, store} from './src/store/store';
 
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+function App() {
+  const queryClient = new QueryClient();
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <Text>ajdkdk</Text>
-    </SafeAreaView>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <Wrapper />
+        </PersistGate>
+      </Provider>
+    </QueryClientProvider>
   );
 }
 export default App;

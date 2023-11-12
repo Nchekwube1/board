@@ -1,13 +1,13 @@
 import React, {FC, useCallback, useEffect} from 'react';
 import TextComponent from '../text/TextComponent';
 import globalStyle from '../../globalStyle/globalStyle';
-import Box from '../layout/Box';
 import {useSharedValue} from 'react-native-reanimated';
 import buttonStyle from './buttonStyle';
 import ButtonDot from './ButtonDot';
 import PressableComponent from '../pressable/PressableComponent';
-import {useAppSelector, usePrimaryTintBg} from '../../constants/utils/hooks';
+import {useAppSelector} from '../../constants/utils/hooks';
 import {buttonProps} from './ButtonComponent';
+import Box from '../layout/Box';
 
 const ButtonWithIconComponent: FC<buttonProps> = ({
   disabled,
@@ -25,7 +25,6 @@ const ButtonWithIconComponent: FC<buttonProps> = ({
 }) => {
   const {darkMode} = useAppSelector(state => state.darkMode);
   const currentPos = useSharedValue(0);
-  const tintBg = usePrimaryTintBg();
   const changer = useCallback(() => {
     if (loading) {
       if (currentPos.value === 2) {
@@ -60,7 +59,6 @@ const ButtonWithIconComponent: FC<buttonProps> = ({
         secondary && darkMode && globalStyle.borWhite,
         secondary && globalStyle.bgTransparent,
         loading && globalStyle.bgTransparent,
-        !!tint && tintBg,
       ]}>
       <PressableComponent
         activeOpacity={0.5}

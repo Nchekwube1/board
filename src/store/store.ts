@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // import AsyncStorage from 'react-native-encrypted-storage';
 import {persistReducer, persistStore} from 'redux-persist';
 import themeSlice from '../reducerSlices/themeSlice';
+import toastSlice from '../reducerSlices/toastSlice';
 
 const mainPersistConfig = {
   key: 'mainPersist',
@@ -11,6 +12,7 @@ const mainPersistConfig = {
 };
 const reducers = combineReducers({
   darkMode: themeSlice,
+  apiStatus: toastSlice,
 });
 
 const persistedReducer = persistReducer(mainPersistConfig, reducers);

@@ -3,13 +3,12 @@ import React, {FC, useState} from 'react';
 import TextComponent from '../text/TextComponent';
 import inputStyles from './inputStyles';
 import {textInputProps} from '../../constants/types/types';
-import Box from '../layout/Box';
 import Feather from 'react-native-vector-icons/Feather';
 import palette from '../../constants/colors/pallete';
 import globalStyle from '../../globalStyle/globalStyle';
 import {useAppSelector} from '../../constants/utils/hooks';
 import PressableComponent from '../pressable/PressableComponent';
-import ErrorAlert from '../../assets/svgs/errorAlert.svg';
+import Box from '../layout/Box';
 
 const PasswordInputComponent: FC<textInputProps> = ({
   errorText,
@@ -123,9 +122,9 @@ const PasswordInputComponent: FC<textInputProps> = ({
             globalStyle.alignItemsCenter,
             globalStyle.mt0p8,
           ]}>
-          <Box style={[globalStyle.pr0p4]}>
+          {/* <Box style={[globalStyle.pr0p4]}>
             <ErrorAlert />
-          </Box>
+          </Box> */}
           <TextComponent
             style={[
               globalStyle.fontSize10,
