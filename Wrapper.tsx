@@ -8,8 +8,8 @@ import {useAppSelector} from './src/constants/utils/hooks';
 // import DeviceInfo from 'react-native-device-info';
 import palette from './src/constants/colors/pallete';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
-import Onboarding from './src/Screens/Onboarding';
 import Box from './src/components/layout/Box';
+import Flinger from './src/Screens/Flinger';
 const links = {
   prefixes: ['tribapay://'],
 };
@@ -33,7 +33,8 @@ const Wrapper = () => {
               // SplashScreen.hide();
             }}
             linking={links}>
-            <Onboarding />
+            <Flinger />
+            {/* <Onboarding /> */}
             {/* <ToastComponent /> */}
             {/* <MainNavigation /> */}
           </NavigationContainer>
