@@ -2,8 +2,7 @@ import React, {useEffect} from 'react';
 import Box from '../components/layout/Box';
 import globalStyle, {width} from '../globalStyle/globalStyle';
 import {ScaledSheet} from 'react-native-size-matters';
-import {mix} from 'react-native-redash';
-import Animated, {
+import {
   interpolate,
   useAnimatedStyle,
   useDerivedValue,
@@ -16,12 +15,21 @@ const Trigonometry = () => {
   const progress = useSharedValue(0);
   const radius = width / 2;
   useEffect(() => {
-    progress.value = withRepeat(withTiming(1, {duration: 3000}), -1, true);
+    // const interval = setInterval(() => {
+    //   progress.value = withTiming(progress.value + 1, {duration: 3000});
+    // }, 3000);
+    // return () => clearInterval(interval);
+    progress.value = withRepeat(
+      withTiming(progress.value + 1, {duration: 3000}),
+      -1,
+      true,
+    );
   }, [progress]);
   const derived = useDerivedValue(() => progress.value);
   if (!derived) {
   }
-  const theta = mix(progress.value, 0, 2 * Math.PI);
+  // const theta = mix(progress.value, 0, 2 * Math.PI);
+  const theta = interpolate(progress.value, [0, 1], [0, 2 * Math.PI]);
 
   const anim = useAnimatedStyle(() => {
     const inpuRange = [0, 0.5, 1];
@@ -34,6 +42,9 @@ const Trigonometry = () => {
       ],
     };
   });
+
+  if (anim) {
+  }
   return (
     <Box
       style={[
@@ -41,13 +52,6 @@ const Trigonometry = () => {
         globalStyle.justifyCenter,
         globalStyle.alignItemsCenter,
       ]}>
-      <Animated.View
-        style={[
-          globalStyle.absolute,
-          {width: 50, height: 50, backgroundColor: 'red'},
-          anim,
-        ]}
-      />
       <Box style={[trigStyle.circle]}>
         <Driver {...{theta, radius, progress}} />
       </Box>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Svg, {Circle, Path} from 'react-native-svg';
+import Svg, {Path} from 'react-native-svg';
 import Box from '../components/layout/Box';
 import globalStyle from '../globalStyle/globalStyle';
 const SvgPlay = () => {

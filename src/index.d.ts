@@ -1,10 +1,10 @@
-import React from 'react';
 declare module '*.png';
 declare module '*.jpg';
 declare module '*.jpeg';
-declare module 'react-native-freshchat-sdk';
-declare module '*.svg' {
+declare module '*.svg';
+{
   import {SvgProps} from 'react-native-svg';
+  // eslint-disable-next-line no-undef
   const content: React.FC<SvgProps>;
   export default content;
 }
