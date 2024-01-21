@@ -27,7 +27,7 @@ end
 
 target 'Playground' do
   config = use_native_modules!
-
+      pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: ['FaceDetectorMLKit']
   # Flags change depending on the env values.
   flags = get_default_flags()
 

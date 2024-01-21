@@ -10,6 +10,7 @@ import palette from './src/constants/colors/pallete';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import Box from './src/components/layout/Box';
 import ScaleList from './src/Screens/ScaleList';
+import FaceDetector from './src/Screens/FaceDetector';
 const links = {
   prefixes: ['tribapay://'],
 };
@@ -33,7 +34,8 @@ const Wrapper = () => {
               // SplashScreen.hide();
             }}
             linking={links}>
-            <ScaleList />
+            <FaceDetector />
+            {/* <ScaleList /> */}
             {/* <Flinger /> */}
             {/* <Onboarding /> */}
             {/* <ToastComponent /> */}
