@@ -12,6 +12,11 @@ import Box from './src/components/layout/Box';
 import ScaleList from './src/Screens/ScaleList';
 import FaceDetector from './src/Screens/FaceDetector';
 import FingerBubbles from './src/Screens/FingerBubbles';
+import SkiaPlayground from './src/Screens/SkiaPlayground';
+import LayoutFlat from './src/Screens/LayoutFlat';
+import Accordion from './src/Screens/Accordion';
+import AnimatedText from './src/Screens/AnimatedText';
+import RangeSlider from './src/Screens/RangeSlider';
 const links = {
   prefixes: ['tribapay://'],
 };
@@ -35,7 +40,12 @@ const Wrapper = () => {
               // SplashScreen.hide();
             }}
             linking={links}>
-            <FingerBubbles />
+            <RangeSlider />
+            {/* <AnimatedText /> */}
+            {/* <Accordion /> */}
+            {/* <LayoutFlat /> */}
+            {/* <SkiaPlayground /> */}
+            {/* <FingerBubbles /> */}
             {/* <FaceDetector /> */}
             {/* <ScaleList /> */}
             {/* <Flinger /> */}

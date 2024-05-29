@@ -5,6 +5,7 @@ import globalStyle, {height} from '../../globalStyle/globalStyle';
 import {ScaledSheet} from 'react-native-size-matters';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 import Animated, {
+  Layout,
   runOnJS,
   useAnimatedGestureHandler,
   useAnimatedRef,
@@ -12,7 +13,7 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import {KeyboardAvoidingView, View} from 'react-native';
+import {Easing, KeyboardAvoidingView, View} from 'react-native';
 import {isIos} from '../../constants/utils/utils';
 import Box from '../layout/Box';
 interface bottomSheetProps {
@@ -133,7 +134,11 @@ const BottomSheetComponent: FC<bottomSheetProps> = ({
             behavior={isIos() ? 'padding' : 'height'}>
             <PanGestureHandler
               onGestureEvent={noOverLay ? undefined : gestureHandler}>
-              <Animated.View style={[aStyle]} ref={viewRef as any}>
+              <Animated.View
+                layout={Layout.easing(Easing.linear)}
+                // layout={Layout.delay(300)}
+                style={[aStyle]}
+                ref={viewRef as any}>
                 <Box
                   backgroundColor={'mainBackground'}
                   style={[
